@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b935bc3bfd4944ab93c4a574dfd0da, type: 3}
+  m_Name: PlayerMoveDir
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 11400000, guid: 432950cb300dd444ca550e9cb3e5b0a0, type: 2}
+  - {fileID: 11400000, guid: c1b231f025d8bda41915596dac1b1980, type: 2}
+  - {fileID: 11400000, guid: 5ec931529e432604cb23c8d9f09e78e3, type: 2}
+  controlDriver:
+    name: moveDir
+    autoIncrement: 0
+    percentageBased: 0
+    guid: 5a7c7cac-8cd7-4b05-9282-80e0baf95b14
+  drivers:
+    keys: []
+    values: 

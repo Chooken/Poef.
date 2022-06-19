@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be19956832124e7fa78f325c15e8f32f, type: 3}
+  m_Name: DirUpOveride
+  m_EditorClassIdentifier: 
+  next: {fileID: 11400000, guid: 432950cb300dd444ca550e9cb3e5b0a0, type: 2}
+  overrides:
+  - fromNode: {fileID: 11400000, guid: 2349d70b48f0d1742804467c115bdbf6, type: 2}
+    toNode: {fileID: 11400000, guid: 76791ad7014702a4ba908d3b62a987d5, type: 2}
+  - fromNode: {fileID: 11400000, guid: bfe85f1c6246c1245aea7ef1c762786b, type: 2}
+    toNode: {fileID: 11400000, guid: e28a8bd066a2c0a4ca7942fcc072b319, type: 2}

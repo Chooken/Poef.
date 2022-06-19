@@ -6,6 +6,14 @@ using UnityEngine.InputSystem;
 public class PlayerTopDownMovementAddon : PlayerAddon
 {
     private TopDownMovementCache m_movementCache;
+    private Rigidbody2D m_rb;
+
+    [SerializeField] private float m_walkSpeed = 5f;
+
+    private void Start()
+    {
+        m_rb = GetComponent<Rigidbody2D>();
+    }
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -22,7 +30,7 @@ public class PlayerTopDownMovementAddon : PlayerAddon
 
     private void FixedUpdate()
     {
-        Debug.Log(m_movementCache.movement);
+        m_rb.velocity = Time.fixedDeltaTime * m_walkSpeed * m_movementCache.movement ;
     }
 }
 
