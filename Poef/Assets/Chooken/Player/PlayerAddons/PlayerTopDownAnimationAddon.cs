@@ -23,29 +23,6 @@ public class PlayerTopDownAnimationAddon : PlayerAddon
         m_rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable()
-    {
-        //m_player.SetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
-    }
-
-    private void OnDisable()
-    {
-        //m_player.UnsetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
-    }
-
-    private void OnMovementChange(InputAction.CallbackContext context)
-    {
-        if (context.ReadValue<Vector2>() == Vector2.zero)
-        {
-            m_reanimator.Set(Drivers.Walk, 0);
-            m_reanimator.Set(Drivers.IsMoving, 0);
-            return;
-        }
-
-        m_reanimator.Set(Drivers.IsMoving, 1);
-        m_reanimator.Set(Drivers.MoveDir, MoveDirectionToAniNum(context.ReadValue<Vector2>()));
-    }
-
     private int MoveDirectionToAniNum(Vector2 moveDir)
     {
         m_reanimator.Flip = false;
