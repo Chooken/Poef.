@@ -15,25 +15,22 @@ public class PlayerTopDownAnimationAddon : PlayerAddon
     }
 
     private Reanimator m_reanimator;
+    private Rigidbody2D m_rb;
 
     private void Awake()
     {
         m_reanimator = GetComponentInChildren<Reanimator>();
+        m_rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
     {
-        m_player.SetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
+        //m_player.SetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
     }
 
     private void OnDisable()
     {
-        m_player.UnsetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
-    }
-
-    private void Update()
-    {
-        
+        //m_player.UnsetPerformedCallback(m_player.Controls.Gameplay.Move, OnMovementChange);
     }
 
     private void OnMovementChange(InputAction.CallbackContext context)
@@ -61,5 +58,18 @@ public class PlayerTopDownAnimationAddon : PlayerAddon
 
         if (moveDir.y < 0) return 1;
         else return 2;
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_rb.velocity == Vector2.zero)
+        {
+            m_reanimator.Set(Drivers.Walk, 0);
+            m_reanimator.Set(Drivers.IsMoving, 0);
+            return;
+        }
+
+        m_reanimator.Set(Drivers.IsMoving, 1);
+        m_reanimator.Set(Drivers.MoveDir, MoveDirectionToAniNum(m_rb.velocity));
     }
 }

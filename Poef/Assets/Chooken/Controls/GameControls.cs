@@ -35,6 +35,24 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseSuggest"",
+                    ""type"": ""Button"",
+                    ""id"": ""c55358f4-c603-4528-a1dd-fae5e1745609"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GamepadSuggest"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5336414e-8b2e-4279-9a93-a29e595ffdca"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -103,6 +121,28 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""599074cd-7eab-4756-ae15-d839659e22bf"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseSuggest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3646dc82-4684-4b80-9c1b-a5977a2d36ab"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.75)"",
+                    ""groups"": """",
+                    ""action"": ""GamepadSuggest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +152,8 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_MouseSuggest = m_Gameplay.FindAction("MouseSuggest", throwIfNotFound: true);
+        m_Gameplay_GamepadSuggest = m_Gameplay.FindAction("GamepadSuggest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,11 +214,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_MouseSuggest;
+    private readonly InputAction m_Gameplay_GamepadSuggest;
     public struct GameplayActions
     {
         private @GameControls m_Wrapper;
         public GameplayActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @MouseSuggest => m_Wrapper.m_Gameplay_MouseSuggest;
+        public InputAction @GamepadSuggest => m_Wrapper.m_Gameplay_GamepadSuggest;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +235,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @MouseSuggest.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseSuggest;
+                @MouseSuggest.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseSuggest;
+                @MouseSuggest.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseSuggest;
+                @GamepadSuggest.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGamepadSuggest;
+                @GamepadSuggest.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGamepadSuggest;
+                @GamepadSuggest.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGamepadSuggest;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -196,6 +248,12 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @MouseSuggest.started += instance.OnMouseSuggest;
+                @MouseSuggest.performed += instance.OnMouseSuggest;
+                @MouseSuggest.canceled += instance.OnMouseSuggest;
+                @GamepadSuggest.started += instance.OnGamepadSuggest;
+                @GamepadSuggest.performed += instance.OnGamepadSuggest;
+                @GamepadSuggest.canceled += instance.OnGamepadSuggest;
             }
         }
     }
@@ -203,5 +261,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnMouseSuggest(InputAction.CallbackContext context);
+        void OnGamepadSuggest(InputAction.CallbackContext context);
     }
 }

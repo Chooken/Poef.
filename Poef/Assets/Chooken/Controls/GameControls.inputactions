@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MouseSuggest",
+                    "type": "Button",
+                    "id": "c55358f4-c603-4528-a1dd-fae5e1745609",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GamepadSuggest",
+                    "type": "PassThrough",
+                    "id": "5336414e-8b2e-4279-9a93-a29e595ffdca",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -81,6 +99,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "599074cd-7eab-4756-ae15-d839659e22bf",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseSuggest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3646dc82-4684-4b80-9c1b-a5977a2d36ab",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.75)",
+                    "groups": "",
+                    "action": "GamepadSuggest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
